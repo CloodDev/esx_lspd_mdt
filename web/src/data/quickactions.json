@@ -1,0 +1,38 @@
+{
+    "revive": {
+        "label": "Revive",
+        "Type": "button"
+    },
+    "maxHealth": {
+        "label": "Pełne życie",
+        "Type": "button"
+    },
+    "maxShield": {
+        "label": "Pełny armor",
+        "Type": "button"
+    },
+    "deleteVehicle": {
+        "label": "Usuń pojazd",
+        "Type": "button"
+    },
+    "pedClear": {
+        "label": "Wyczyść peda",
+        "Type": "button"
+    },
+    "cleanVehicle": {
+        "label": "Wyczyść pojazd",
+        "Type": "button"
+    },
+    "fixVehicle": {
+        "label": "Napraw pojazd",
+        "Type": "button"
+    },
+    "clearRange": {
+        "label": "Wyczyść w obszarze",
+        "Type": "button"
+    },
+    "clearEffects": {
+        "label": "Wyczyść efekty",
+        "Type": "button"
+    }
+}

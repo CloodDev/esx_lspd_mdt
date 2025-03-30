@@ -1,0 +1,16 @@
+    fetch(`https://NazwaTegoSkryptu/NUICallbackName`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify({
+        Dane w JSON
+      }),
+    });
+
+    window.addEventListener("message", (event) => {
+    /*event.data jest zawsze reszta jest do dostosowania*/
+    if (event.data.type === "open") {
+      handleShow();
+    }
+  });

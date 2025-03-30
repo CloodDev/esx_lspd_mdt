@@ -1,0 +1,12 @@
+.background {
+    width: 75vw;
+    height: 75vh;
+    background-color: var(--main);
+    border-radius: 12px;
+    border: 12px solid var(--mainDark);
+}
+
+.background_layout{
+    margin-right: auto;
+    margin-left: auto;
+}

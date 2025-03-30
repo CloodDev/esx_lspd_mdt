@@ -1,0 +1,34 @@
+{
+  "start": {
+    "name": "Start",
+    "icon": "nav-start.svg"
+  },
+  "projects": {
+    "name": "Projects",
+    "icon": "nav-projects.svg"
+  },
+  "tasks": {
+    "name": "Tasks",
+    "icon": "nav-tasks.svg"
+  },
+  "calendar": {
+    "name": "Calendar",
+    "icon": "nav-calendar.svg"
+  },
+  "contacts": {
+    "name": "Contacts",
+    "icon": "nav-contacts.svg"
+  },
+  "settings": {
+    "name": "Settings",
+    "icon": "nav-settings.svg"
+  },
+  "help": {
+    "name": "Help",
+    "icon": "nav-help.svg"
+  },
+  "feedback": {
+    "name": "Feedback",
+    "icon": "nav-feedback.svg"
+  }
+}
