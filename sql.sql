@@ -1,0 +1,6 @@
+CREATE TABLE badge_numbers (
+  id INT NOT NULL AUTO_INCREMENT,
+  identifier VARCHAR(255) NOT NULL,
+  number VARCHAR(16) NOT NULL,
+  PRIMARY KEY (id)
+);

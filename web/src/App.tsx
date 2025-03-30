@@ -7,7 +7,7 @@ import Start from "./modules/view/start/start";
 
 export default function App() {
   const [toggleViewOpacity, setToggleViewOpacity] = useState(false);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     document.addEventListener("keydown", (e) => {

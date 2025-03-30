@@ -1,5 +1,4 @@
 playerData = {}
-Cooldown = 0
 Citizen.CreateThread(function()
   while true do
     playerData = ESX.GetPlayerData()
@@ -25,16 +24,22 @@ Functions
 function openTablet()
   if hasPermissions() then
     SendNUIMessage({
-      type = "officerData",
-      name = playerData.name,
-      badgeNumber = getBadgeNumber(NetworkGetNetworkIdFromEntity(PlayerPedId()))
-    })
-    SendNUIMessage({
       type = "open"
     })
     SetNuiFocus(true, true)
   end
 end
+
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(100)
+    SendNUIMessage({
+      type = "officerData",
+      name = getName(),
+      badgeNumber = getBadgeNumber()
+    })
+  end
+end)
 
 function hasPermissions(category)
   local playerData = ESX.GetPlayerData()
@@ -44,6 +49,44 @@ function hasPermissions(category)
   return false
 end
 
+--- TODO: Fix this function to get the badge number from the database 
+
 function getBadgeNumber()
-  return math.random(1000, 9999)
+  -- local tempBadge = nil
+  -- ESX.TriggerServerCallback("lspdmdt:getbadge", function(badgeNumber)
+  --   tempBadge = badgeNumber
+  -- end)
+  -- while tempBadge == nil do
+  --   Citizen.Wait(0)
+  -- end
+  -- print(tempBadge)
+  return 1
 end
+
+RegisterNetEvent('esx_lspd_mdt:openTablet')
+AddEventHandler('esx_lspd_mdt:openTablet', function()
+  openTablet()
+end)
+
+RegisterCommand("tablet", function(source, args, rawCommand)
+  if hasPermissions() then
+    openTablet()
+  else
+    ESX.ShowNotification("You do not have permission to use this command.")
+  end
+end, false)
+
+function getName()
+  local tempname = nil
+  ESX.TriggerServerCallback("lspdmdt:getname", function(name)
+    tempname = name
+  end)
+  while tempname == nil do
+    Citizen.Wait(0)
+  end
+  return tempname
+end
+
+RegisterCommand("setBadge", function(source, args, rawCommand)
+  TriggerServerEvent("lspdmdt:setBadge", 102,1)
+end, false)
