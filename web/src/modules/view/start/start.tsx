@@ -15,16 +15,6 @@ function Start() {
   useEffect(() => {
     // Register NUI callback
     window.addEventListener("message", handleNuiMessage);
-
-    // Send ready event to FiveM
-    fetch("https://lspd_mdt/ready", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({})
-    });
-
     return () => {
       window.removeEventListener("message", handleNuiMessage);
     };
