@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./modules/basic/background/background";
 import { fetchNui } from "./modules/tools/fetchNui";
 import Start from "./modules/view/start/start";
+import Bossmenu from "./modules/view/bossmenu/bossmenu";
 
 export default function App() {
   const [toggleViewOpacity, setToggleViewOpacity] = useState(false);
@@ -21,8 +22,8 @@ export default function App() {
       }
     });
     return () => {
-      document.removeEventListener("keydown", () => {});
-      document.removeEventListener("keyup", () => {});
+      document.removeEventListener("keydown", () => { });
+      document.removeEventListener("keyup", () => { });
     };
   }, [toggleViewOpacity]);
 
@@ -39,7 +40,7 @@ export default function App() {
       }
     });
     return () => {
-      document.removeEventListener("keydown", () => {});
+      document.removeEventListener("keydown", () => { });
     };
   }, [visible]);
 
@@ -48,11 +49,22 @@ export default function App() {
     setVisible(false);
   }
 
-  window.addEventListener("message", (event) => {
-    if (event.data.type === "open") {
+  useEffect(() => {
+    window.addEventListener("message", handleNuiMessage);
+    return () => {
+      window.removeEventListener("message", handleNuiMessage);
+    };
+  }, []);
+
+  const handleNuiMessage = (event: MessageEvent) => {
+    const data = event.data;
+    if (data.type === "open") {
       handleShow();
+    } else if (data.type === "setPerms") {
+      setPerms(data.perms);
     }
-  });
+  };
+
   return (
     <main
       style={{
@@ -65,6 +77,9 @@ export default function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Start />} />
+
+          <Route path="/boss" element={<Bossmenu />} />
+
           <Route
             path="*"
             element={<div>Nie masz wystarczających permisji</div>}

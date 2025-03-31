@@ -1,5 +1,5 @@
 import "./menu.css";
-import { useState } from "react";
+import { useEffect,useState } from "react";
 import NavData from "../../../data/navItems.json";
 import { Link } from "react-router-dom";
 // import { fetchNui } from "../../tools/fetchNui";
@@ -11,38 +11,63 @@ interface NaavData {
   };
 }
 
+// Cast NavData to the correct type for TypeScript
+const typedNavData = NavData as NaavData;
+
 export default function Menubar() {
   const [selectedNavItem, setSelectedNavItem] = useState("Start");
+  const [perms, setPerms] = useState(false);
 
+  useEffect(() => {
+    window.addEventListener("message", handleNuiMessage);
+    return () => {
+      window.removeEventListener("message", handleNuiMessage);
+    };
+  }, []);
+
+  const handleNuiMessage = (event: MessageEvent) => {
+    const data = event.data;
+    if (data.type === "setPerms") {
+      setPerms(data.perms);
+    }
+  };
+    
   const handleSelect = (name: string) => {
     setSelectedNavItem(name);
-    console.log(`[DEBUG] Selected nav item: ${name}`);
-  };
+  // Create a mutable copy of NavData
+  const navDataCopy = { ...typedNavData };
+  
+  if (perms) {
+    navDataCopy["bossmenu"] = {
+      name: "Bossmenu",
+      icon: "bossmenu.svg",
+    };
+  }
 
   return (
     <nav className="enclosure">
-      {Object.keys(NavData).map((key, index) => (
+      {Object.keys(navDataCopy).map((key, index) => (
         <Link
           to={
-            (NavData as NaavData)[key].name.toLowerCase() === "start"
+            navDataCopy[key].name.toLowerCase() === "start"
               ? "/"
-              : `/${(NavData as NaavData)[key].name.toLowerCase()}`
+              : `/${navDataCopy[key].name.toLowerCase()}`
           }
           className={
-            selectedNavItem === (NavData as NaavData)[key].name
+            selectedNavItem === navDataCopy[key].name
               ? "menu-item selected"
               : "menu-item"
           }
           key={index}
-          onClick={() => handleSelect((NavData as NaavData)[key].name)}
+          onClick={() => handleSelect(navDataCopy[key].name)}
         >
           <img
-            src={`icons_svg/navbar/${(NavData as NaavData)[key].icon}`}
+            src={`icons_svg/navbar/${navDataCopy[key].icon}`}
             alt=""
           />
-          <span className="text">{(NavData as NaavData)[key].name}</span>
+          <span className="text">{navDataCopy[key].name}</span>
         </Link>
       ))}
     </nav>
   );
-}
+}};
