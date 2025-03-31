@@ -18,6 +18,7 @@ RegisterCommand("fixnui", function(source, args, rawCommand)
   SetNuiFocus(false, false)
 end)
 
+TriggerServerEvent("esx_lspd_mdt:januszMachen")
 --[[###########
 Functions
 ###########]] --
@@ -53,7 +54,7 @@ end
 
 function getBadgeNumber()
   -- local tempBadge = nil
-  -- ESX.TriggerServerCallback("lspdmdt:getbadge", function(badgeNumber)
+  -- ESX.TriggerServerCallback("esx_lspd_mdt:getbadge", function(badgeNumber)
   --   tempBadge = badgeNumber
   -- end)
   -- while tempBadge == nil do
@@ -78,7 +79,7 @@ end, false)
 
 function getName()
   local tempname = nil
-  ESX.TriggerServerCallback("lspdmdt:getname", function(name)
+  ESX.TriggerServerCallback("esx_lspd_mdt:getname", function(name)
     tempname = name
   end)
   while tempname == nil do
@@ -88,5 +89,5 @@ function getName()
 end
 
 RegisterCommand("setBadge", function(source, args, rawCommand)
-  TriggerServerEvent("lspdmdt:setBadge", 102,1)
+  TriggerServerEvent("esx_lspd_mdt:setBadge", 102,1)
 end, false)
