@@ -60,9 +60,7 @@ export default function App() {
     const data = event.data;
     if (data.type === "open") {
       handleShow();
-    } else if (data.type === "setPerms") {
-      setPerms(data.perms);
-    }
+    };
   };
 
   return (
