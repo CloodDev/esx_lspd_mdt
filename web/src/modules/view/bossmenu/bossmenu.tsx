@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./start.css";
 
 interface OfficerData {
   officer: {
@@ -81,13 +80,6 @@ function Bossmenu() {
         </div>
       </div>
       ))}
-      {!perms && (
-      <div className="tablet-start">
-        <div className="officer-header">
-        <p>You don't have permission to view this section</p>
-        </div>
-      </div>
-      )}
     </>
   );
 }

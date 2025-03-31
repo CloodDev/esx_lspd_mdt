@@ -8,7 +8,7 @@ import Bossmenu from "./modules/view/bossmenu/bossmenu";
 
 export default function App() {
   const [toggleViewOpacity, setToggleViewOpacity] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
